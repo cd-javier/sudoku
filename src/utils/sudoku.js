@@ -284,6 +284,27 @@ class Board {
     // After trying all numbers, check if we've found exactly one solution
     return count.total === 1;
   }
+
+  isComplete() {
+    let result = true;
+
+    this.board.forEach((row, rowIndex) => {
+      row.forEach((cell, cellIndex) => {
+        if (!cell.value) {
+          result = false;
+        } else if (!cell.locked) {
+          const findConflicts = this.findConflicts(
+            rowIndex,
+            cellIndex,
+            cell.value
+          );
+          if (findConflicts.conflicts) result = false;
+        }
+      });
+    });
+
+    return result;
+  }
 }
 
 export default Board;
