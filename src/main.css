@@ -9,7 +9,8 @@
   --locked-bg: #f5f9ff;
 
   --conflicting-num: #931515;
-  --conflicting-bg: #fee2e2;
+  --conflicting-bg: hsl(0, 100%, 94%);
+  --locked-conflict-bg: hsl(0, 50%, 92%);
 
   --btn-bg: #398bf7;
   --disabled-btn-bg: #a9ceff;

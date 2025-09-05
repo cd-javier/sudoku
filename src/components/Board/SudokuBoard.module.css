@@ -1,10 +1,11 @@
 .cell {
-  aspect-ratio: 1/1;
+  aspect-ratio: 1;
   background-color: var(--cell-bg);
 
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
 }
 
 .cellNotesGrid {
@@ -28,10 +29,13 @@
   background: var(--selected-bg);
 }
 
-.locked,
-.locked.conflict {
+.locked {
   font-weight: bold;
   background: var(--locked-bg);
+}
+
+.locked.conflict {
+  background: var(--locked-conflict-bg);
 }
 
 .selected.conflict {
