@@ -1,0 +1,56 @@
+.wrapper {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.wrapper header {
+  text-align: center;
+  position: relative;
+}
+
+.wrapper header a {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  color: inherit;
+  text-decoration: none;
+  width: 40px;
+}
+
+.wrapper .back {
+  left: 0;
+}
+
+.wrapper .refresh {
+  right: 0;
+  padding: 5px;
+}
+
+.wrapper header a svg {
+  width: 100%;
+  fill: var(--main-text);
+  vertical-align: middle;
+}
+
+.wrapper main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrapper footer {
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.wrapper footer a {
+  color: inherit;
+}

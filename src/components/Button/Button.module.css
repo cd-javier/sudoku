@@ -1,0 +1,46 @@
+.button {
+  display: inline-block;
+  appearance: none;
+  border: none;
+  color: inherit;
+  padding: 0.5rem 1rem;
+
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.button svg {
+  fill: var(--btn-text);
+  vertical-align: middle;
+}
+
+.disabled {
+  background-color: var(--disabled-btn-bg);
+}
+
+.number.notesNumber {
+  font-style: italic;
+}
+
+.button.number {
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
+.button.number svg {
+  height: 2rem;
+}
+
+.button.action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.button.action svg {
+  height: 1.5rem;
+}

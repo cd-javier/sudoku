@@ -1,0 +1,22 @@
+:root {
+  --bg: #f8f9fa;
+
+  --main-text: #495057;
+  --grid-bd: var(--main-text);
+
+  --cell-bg: #ffffff;
+  --selected-bg: #dbeafe;
+  --locked-bg: #f5f9ff;
+
+  --conflicting-num: #931515;
+  --conflicting-bg: #fee2e2;
+
+  --btn-bg: #398bf7;
+  --disabled-btn-bg: #a9ceff;
+  --btn-text: #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--main-text);
+}

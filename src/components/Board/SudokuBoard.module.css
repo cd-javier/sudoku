@@ -1,0 +1,61 @@
+.cell {
+  aspect-ratio: 1/1;
+  background-color: var(--cell-bg);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cellNotesGrid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.cellNote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.selected,
+.locked.selected {
+  background: var(--selected-bg);
+}
+
+.locked,
+.locked.conflict {
+  font-weight: bold;
+  background: var(--locked-bg);
+}
+
+.selected.conflict {
+  background-color: var(--selected-bg);
+}
+
+.conflict {
+  background-color: var(--conflicting-bg);
+  color: var(--conflicting-num);
+}
+
+.grid,
+.block {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.grid {
+  background: var(--grid-bd);
+  gap: 3px;
+  padding: 3px;
+}
+
+.block {
+  gap: 1px;
+}

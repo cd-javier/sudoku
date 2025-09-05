@@ -1,10 +1,12 @@
 import shuffle from './shuffle.js';
 
 class Cell {
-  constructor(value = null, locked = false, notes = new Set()) {
+  constructor(value = null, locked = false, notes = new Set(), row, col) {
     this.value = value;
     this.locked = locked;
     this.notes = notes;
+    this.row = row;
+    this.col = col;
   }
 
   checkValidity(num) {
@@ -12,18 +14,17 @@ class Cell {
     if (typeof num !== 'number' || num < 1 || num > 9) {
       throw new Error('Only numbers between 1 and 9 allowed');
     }
-    if (this.locked) {
-      throw new Error("Can't fill locked cells");
-    }
   }
 
   addNumber(num) {
+    if (this.locked) return;
     this.checkValidity(num);
     this.notes = new Set();
     this.value = num;
   }
 
   removeNumber() {
+    if (this.locked) return;
     this.value = null;
   }
 
@@ -58,14 +59,29 @@ class Board {
       row.map((cell) => ({
         value: cell.value ?? (cell.notes.size ? [...cell.notes].sort() : null),
         locked: cell.locked,
+        row: cell.row,
+        col: cell.col,
       }))
     );
   }
 
+  switchNotes() {
+    this.notesMode = !this.notesMode;
+  }
+
   createEmptyGrid() {
-    return Array.from({ length: 9 }, () =>
+    const grid = Array.from({ length: 9 }, () =>
       Array.from({ length: 9 }, () => new Cell())
     );
+
+    grid.forEach((row, rowIndex) =>
+      row.forEach((cell, colIndex) => {
+        cell.row = rowIndex;
+        cell.col = colIndex;
+      })
+    );
+
+    return grid;
   }
 
   createPrefilledGrid(mode) {
@@ -73,6 +89,7 @@ class Board {
     if (mode === 'easy') blanks += 30;
     if (mode === 'medium') blanks += 40;
     if (mode === 'hard') blanks += 50;
+    if (mode === 'test') blanks = 1;
 
     const board = Board.generateFullBoard();
 
@@ -154,11 +171,31 @@ class Board {
     return { result: true };
   }
 
+  findAllConflicts() {
+    const conflicts = [];
+
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        const targetCell = this.board[i][j];
+        if (targetCell.value === null) continue;
+        const hasConflicts = !this.findConflicts(i, j, targetCell.value).result;
+        if (hasConflicts) conflicts.push({ row: i, col: j });
+      }
+    }
+
+    return conflicts;
+  }
+
   addNumber(row, col, num) {
     this.addToLog();
 
     if (this.notesMode) {
       this.board[row][col].addNote(num);
+      return { result: true };
+    }
+
+    if (this.board[row][col].value === num) {
+      this.board[row][col].removeNumber();
       return { result: true };
     }
 
@@ -169,7 +206,13 @@ class Board {
     return validity;
   }
 
+  removeNumber(row, col) {
+    this.addToLog();
+    this.board[row][col].clear();
+  }
+
   clear() {
+    this.addToLog();
     this.board.forEach((row) => row.forEach((cell) => cell.clear()));
   }
 
@@ -185,19 +228,33 @@ class Board {
     const newBoard = new Board();
     newBoard.board = this.board.map((row) =>
       row.map((cell) => {
-        const c = new Cell(cell.value, cell.locked);
-        c.notes = new Set([...cell.notes]);
+        const c = new Cell(
+          cell.value,
+          cell.locked,
+          new Set([...cell.notes]),
+          cell.row,
+          cell.col
+        );
         return c;
       })
     );
     newBoard.notesMode = this.notesMode;
+    newBoard.log = this.log;
     return newBoard;
   }
 
   addToLog() {
-    if (!this.log) this.log = [];
     const logBoard = this.board.map((row) =>
-      row.map((cell) => new Cell(cell.value, cell.locked, new Set(cell.notes)))
+      row.map(
+        (cell) =>
+          new Cell(
+            cell.value,
+            cell.locked,
+            new Set([...cell.notes]),
+            cell.row,
+            cell.col
+          )
+      )
     );
     this.log.push(logBoard);
   }
