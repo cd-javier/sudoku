@@ -27,6 +27,8 @@
 .selected,
 .locked.selected {
   background: var(--selected-bg);
+
+  transition: background-color 0.3s ease;
 }
 
 .locked {
