@@ -1,0 +1,22 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions > * {
+  flex: 1;
+}

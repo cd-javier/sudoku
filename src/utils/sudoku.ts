@@ -8,7 +8,7 @@ type CellOptions = {
   col?: number;
 };
 
-class Cell {
+export class Cell {
   value: number | null;
   locked: boolean;
   notes: Set<number>;
@@ -82,7 +82,7 @@ class Cell {
   }
 }
 
-type Modes = 'test' | 'blank' | 'easy' | 'medium' | 'hard';
+export type Modes = 'test' | 'blank' | 'easy' | 'medium' | 'hard';
 
 class Board {
   notesMode: boolean;
