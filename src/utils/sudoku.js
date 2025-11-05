@@ -172,13 +172,20 @@ class Board {
   }
 
   findAllConflicts() {
+    // Returns an array with all the cells that have a conflict
     const conflicts = [];
 
+    // Loop throw all the cells of the board
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
+        // Early exit if the cell has already been discovered to have a conflict
+        if (conflicts.some((cell) => cell.row === i && cell.col === j))
+          continue;
         const targetCell = this.board[i][j];
+        // Exit if the cell is empty
         if (targetCell.value === null) continue;
         const hasConflicts = !this.findConflicts(i, j, targetCell.value).result;
+        // If it has conflicts, the coords are pushed to the conflicts array
         if (hasConflicts) conflicts.push({ row: i, col: j });
       }
     }
@@ -187,6 +194,7 @@ class Board {
   }
 
   addNumber(row, col, num) {
+    // Adds the current board to the log
     this.addToLog();
 
     if (this.notesMode) {

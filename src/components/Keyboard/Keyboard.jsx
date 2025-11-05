@@ -5,12 +5,12 @@ import styles from './Keyboard.module.css';
 export default function Keyboard({
   handleNumber,
   handleDelete,
-  handleUndo,
-  handleNotes,
-  handleClear,
   isNumberDisabled,
+  handleUndo,
   isUndoDisabled,
+  handleNotes,
   isNotesMode,
+  handleClear,
 }) {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 

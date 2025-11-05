@@ -5,12 +5,12 @@
   --grid-bd: var(--main-text);
 
   --cell-bg: #ffffff;
-  --selected-bg: #dbeafe;
-  --locked-bg: #f5f9ff;
+  --selected-bg: hsl(216, 100%, 90%);
+  --locked-bg: hsl(216, 100%, 97%);
 
   --conflicting-num: #931515;
   --conflicting-bg: hsl(0, 100%, 94%);
-  --locked-conflict-bg: hsl(0, 50%, 92%);
+  --locked-conflict-bg: hsl(0, 80%, 85%);
 
   --btn-bg: #398bf7;
   --disabled-btn-bg: #a9ceff;
